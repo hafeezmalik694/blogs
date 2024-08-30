@@ -1,0 +1,21 @@
+<div class="container mt-2">
+  <h1 class="mb-4">Posts</h1>
+  <div class="list-group">
+    <% @posts.each do |post| %>
+      <div class="list-group-item">
+        <h3>
+          <%= link_to post.title, post, class: 'text-decoration-none' %>
+        </h3>
+        <p><%= post.content %></p>
+        <p>
+            <% if post.liked_by?(current_user) %>
+            <%= link_to 'Unlike', like_post_path(post), method: :post, class: 'btn btn-sm btn-danger' %>
+            <% else %>
+            <%= link_to 'Like', like_post_path(post), method: :post, class: 'btn btn-sm btn-info' %>
+            <% end %>
+            <%= post.likes.count %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>

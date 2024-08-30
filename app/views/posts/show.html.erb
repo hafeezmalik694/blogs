@@ -1,0 +1,25 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h1 class="card-title"><%= @post.title %></h1>
+      <p class="card-text"><%= @post.content %></p>
+    </div>
+    <div class="card-footer">
+      <p>
+        Likes: <%= @post.likes.count %>
+        <% if @post.liked_by?(current_user) %>
+          <%= link_to 'Unlike', like_post_path(@post), method: :post, class: 'btn btn-sm btn-danger' %>
+        <% else %>
+          <%= link_to 'Like', like_post_path(@post), method: :post, class: 'btn btn-sm btn-info' %>
+        <% end %>
+      </p>
+
+      <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-warning' %>
+      <%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <%= link_to 'Back to Posts', posts_path, class: 'btn btn-secondary' %>
+  </div>
+</div>
